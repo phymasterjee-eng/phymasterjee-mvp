@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 exports.handler = async (event) => {
   // Debug: confirm Netlify is passing the GEMINI_API_KEY
   console.log("DEBUG: GEMINI_API_KEY present?", !!process.env.GEMINI_API_KEY);
@@ -16,7 +14,7 @@ exports.handler = async (event) => {
   try {
     const { question } = JSON.parse(event.body);
 
-    // Gemini API endpoint (latest stable model)
+    // Gemini API endpoint
     const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
 
     const response = await fetch(`${url}?key=${GEMINI_KEY}`, {
@@ -42,7 +40,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // Extract text safely
     const answer = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No solution generated";
 
     return {
