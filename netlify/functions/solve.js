@@ -14,9 +14,9 @@ exports.handler = async (event) => {
   try {
     const { question } = JSON.parse(event.body);
 
-    // Gemini API endpoint
-    const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
-
+    
+    // Gemini API endpoint (correct model name)
+const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent";
     const response = await fetch(`${url}?key=${GEMINI_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
