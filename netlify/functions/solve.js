@@ -49,7 +49,7 @@ exports.handler = async (event) => {
     }
 
     // Use a fast/cost-efficient Flash model
-    const model = "gemini-1.5-flash";
+    const model = "gemini-1.5-flash"; // or "gemini-2.0-flash" if available for your project
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
     // Prompt: concise and JEE-oriented, ask for LaTeX
@@ -59,6 +59,7 @@ Keep explanations focused and brief, suitable for an exam solution.`;
 
     const userPrompt = `Topic: ${topic}\nProblem:\n${question}\n\nProvide a step-by-step solution and final boxed answer.`;
 
+    // Correct payload: put sampling and length controls under `generationConfig`
     const payload = {
       contents: [
         {
@@ -67,10 +68,11 @@ Keep explanations focused and brief, suitable for an exam solution.`;
           ]
         }
       ],
-      // cost controls / generation controls (model-specific)
-      temperature: 0.1,
-      // request a reasonable maximum output size (reduce token cost)
-      maxOutputTokens: 512
+      generationConfig: {
+        temperature: 0.1,
+        // model-specific token control name; for generateContent use maxOutputTokens
+        maxOutputTokens: 512
+      }
     };
 
     const resp = await fetch(`${url}?key=${GEMINI_KEY}`, {
