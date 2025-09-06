@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PhyMasterJEE — Physics Solver</title>
+
+  <!-- Basic styling (you can replace with your style.css if present) -->
+  <style>
+    :root{--bg:#f6f8fb;--card:#ffffff;--accent:#0b63d6}
+    *{box-sizing:border-box}
+    body{font-family:Inter,Segoe UI,Arial; margin:0; background:var(--bg); color:#111}
+    header{padding:28px;text-align:center;background:var(--accent); color:#fff}
+    h1{margin:0;font-size:28px}
+    .tag{color:#eef3ff;margin-top:6px}
+    main{max-width:900px;margin:20px auto;padding:16px}
+    .card{background:var(--card);border-radius:8px;padding:16px;margin-bottom:16px;box-shadow:0 6px 18px rgba(10,10,10,0.06)}
+    textarea{width:100%;height:140px;border:1px solid #ddd;border-radius:6px;padding:10px;font-size:15px;resize:vertical}
+    .row{display:flex;gap:10px;margin-top:10px;align-items:center}
+    select{padding:8px;border-radius:6px;border:1px solid #ddd}
+    button{background:var(--accent);color:#fff;padding:10px 16px;border:none;border-radius:6px;cursor:pointer}
+    button:disabled{opacity:0.6;cursor:not-allowed}
+    .status{margin-top:10px;color:#666}
+    .solution{white-space:pre-wrap; border:1px solid #eef3ff; padding:14px; border-radius:6px; background:#fbfdff; min-height:140px; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif}
+    footer{text-align:center;padding:20px;color:#777}
+    .controls {width:100%; display:flex; gap:10px; align-items:center}
+    .small { font-size:13px; color:#666 }
+  </style>
+
+  <!-- MathJax config: enable $...$ and automatic processing -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+  <header>
+    <h1>PhyMasterJEE</h1>
+    <div class="tag">AI-powered JEE / NSEP Physics Problem Solver</div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Enter problem</h2>
+      <textarea id="question" placeholder="Paste a JEE or NSEP physics problem here..."></textarea>
+
+      <div class="row">
+        <select id="topic">
+          <option value="">General</option>
+          <option>Mechanics</option>
+          <option>Electrodynamics</option>
+          <option>Optics</option>
+          <option>Thermal Physics</option>
+          <option>Modern Physics</option>
+        </select>
+
+        <!-- button triggers solveProblem() in script.js -->
+        <button id="solveBtn" onclick="solveProblem()">Solve</button>
+
+        <div class="small">Status: <span id="status">Ready</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Solution</h2>
+      <div id="solution" class="solution">Your step-by-step solution will appear here.</div>
+    </section>
+
+    <section class="card small">
+      <div><strong>Note:</strong> Solutions use LaTeX. If the AI output is plain text, we try to auto-convert common equation-like lines into LaTeX for rendering.</div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Built by Abhay — PhyMasterJEE</small>
+  </footer>
+
+  <!-- Link to the JS logic -->
+  <script src="script.js"></script>
+</body>
+</html>
