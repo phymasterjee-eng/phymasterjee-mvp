@@ -1,7 +1,6 @@
 exports.handler = async function (event) {
   try {
     const { question, topic } = JSON.parse(event.body || "{}");
-
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
@@ -13,15 +12,14 @@ exports.handler = async function (event) {
 
     const prompt = `
 You are an expert JEE Physics teacher.
-
-Solve step-by-step clearly with equations in LaTeX.
+Solve step-by-step clearly using LaTeX for equations.
 
 Topic: ${topic || "General"}
 Question: ${question}
 `;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: {
@@ -30,6 +28,7 @@ Question: ${question}
         body: JSON.stringify({
           contents: [
             {
+              role: "user",
               parts: [{ text: prompt }]
             }
           ]
@@ -66,7 +65,6 @@ Question: ${question}
 
   } catch (error) {
     console.error("Server error:", error);
-
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Server error occurred." })
