@@ -1,174 +1,120 @@
-diff --git a/index.html b/index.html
-index f4e227f891cfb20595efa5570e63bcad57e3dd79..118d3c74a28a515ddf01607be22989fed75b131d 100644
---- a/index.html
-+++ b/index.html
-@@ -1,90 +1,118 @@
- <!doctype html>
- <html lang="en">
- <head>
-   <meta charset="utf-8" />
-   <meta name="viewport" content="width=device-width,initial-scale=1" />
--  <title>PhyMasterJEE — Physics Solver</title>
-+  <title>PhyMasterJEE | Courses, Doubts & JEE Physics Solver</title>
-+  <meta name="description" content="PhyMasterJEE helps students prepare Physics for JEE with paid courses, doubt collection and an AI-powered problem solver." />
-+  <link rel="stylesheet" href="style.css" />
- 
--  <!-- Basic styling (you can replace with your style.css if present) -->
--  <style>
--    :root{--bg:#f6f8fb;--card:#ffffff;--accent:#0b63d6}
--    *{box-sizing:border-box}
--    body{font-family:Inter,Segoe UI,Arial; margin:0; background:var(--bg); color:#111}
--    header{padding:28px;text-align:center;background:var(--accent); color:#fff}
--    h1{margin:0;font-size:28px}
--    .tag{color:#eef3ff;margin-top:6px}
--    main{max-width:900px;margin:20px auto;padding:16px}
--    .card{background:var(--card);border-radius:8px;padding:16px;margin-bottom:16px;box-shadow:0 6px 18px rgba(10,10,10,0.06)}
--    textarea{width:100%;height:140px;border:1px solid #ddd;border-radius:6px;padding:10px;font-size:15px;resize:vertical}
--    .row{display:flex;gap:10px;margin-top:10px;align-items:center}
--    select{padding:8px;border-radius:6px;border:1px solid #ddd}
--    button{background:var(--accent);color:#fff;padding:10px 16px;border:none;border-radius:6px;cursor:pointer}
--    button:disabled{opacity:0.6;cursor:not-allowed}
--    .status{margin-top:10px;color:#666}
--    .solution{white-space:pre-wrap; border:1px solid #eef3ff; padding:14px; border-radius:6px; background:#fbfdff; min-height:140px; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif}
--    footer{text-align:center;padding:20px;color:#777}
--    .controls {width:100%; display:flex; gap:10px; align-items:center}
--    .small { font-size:13px; color:#666 }
--  </style>
--
--  <!-- MathJax config: enable $...$ and automatic processing -->
-   <script>
-     window.MathJax = {
-       tex: {
-         inlineMath: [['$', '$'], ['\\(', '\\)']],
-         displayMath: [['$$','$$'], ['\\[','\\]']],
-         processEscapes: true
-       },
-       options: {
-         skipHtmlTags: ['script','noscript','style','textarea','pre','code']
-       }
-     };
-   </script>
-   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
- </head>
- <body>
--  <header>
--    <h1>PhyMasterJEE</h1>
--    <div class="tag">AI-powered JEE / NSEP Physics Problem Solver</div>
-+  <header class="hero">
-+    <div class="container">
-+      <p class="kicker">phymasterjee.in</p>
-+      <h1>Build your JEE Physics edge with PhyMasterJEE</h1>
-+      <p class="hero-copy">Start with foundation-to-advanced courses, collect student queries, and solve numericals instantly using AI.</p>
-+      <a class="cta" href="#courses">Explore Courses</a>
-+    </div>
-   </header>
- 
--  <main>
--    <section class="card">
--      <h2>Enter problem</h2>
--      <textarea id="question" placeholder="Paste a JEE or NSEP physics problem here..."></textarea>
-+  <main class="container">
-+    <section id="courses" class="card">
-+      <h2>Courses you can sell now</h2>
-+      <p class="muted">These cards can be updated with your final prices/links once your payment gateway is connected.</p>
-+      <div class="course-grid">
-+        <article class="course-card">
-+          <h3>JEE Main Physics Sprint</h3>
-+          <p>High-scoring chapterwise modules + weekly tests.</p>
-+          <p class="price">₹2,499</p>
-+        </article>
-+        <article class="course-card">
-+          <h3>JEE Advanced Problem Camp</h3>
-+          <p>Advanced illustrations, PYQ strategy, and rank-booster sheets.</p>
-+          <p class="price">₹5,999</p>
-+        </article>
-+        <article class="course-card">
-+          <h3>NSEP + Olympiad Foundation</h3>
-+          <p>Conceptual depth for aspirants targeting beyond JEE.</p>
-+          <p class="price">₹3,999</p>
-+        </article>
-+      </div>
-+    </section>
-+
-+    <section id="enquiry" class="card two-col">
-+      <div>
-+        <h2>Student lead collection form</h2>
-+        <p class="muted">This form is configured for Netlify Forms, so every submission gets captured in your site dashboard.</p>
-+        <form id="leadForm" name="student-leads" method="POST" data-netlify="true">
-+          <input type="hidden" name="form-name" value="student-leads" />
-+          <label>Student name<input required name="name" type="text" /></label>
-+          <label>Phone / WhatsApp<input required name="phone" type="tel" /></label>
-+          <label>Email<input required name="email" type="email" /></label>
-+          <label>Class<input name="class" type="text" placeholder="Class 11 / 12 / Dropper" /></label>
-+          <label>Interested course
-+            <select name="interestedCourse">
-+              <option>JEE Main Physics Sprint</option>
-+              <option>JEE Advanced Problem Camp</option>
-+              <option>NSEP + Olympiad Foundation</option>
-+            </select>
-+          </label>
-+          <button type="submit">Submit Lead</button>
-+          <p id="leadStatus" class="status">Ready to collect student data.</p>
-+        </form>
-+      </div>
-+
-+      <div>
-+        <h2>Ask a query / doubt</h2>
-+        <p class="muted">Collect detailed student doubts for callback or class planning.</p>
-+        <form id="queryForm" name="student-queries" method="POST" data-netlify="true">
-+          <input type="hidden" name="form-name" value="student-queries" />
-+          <label>Student name<input required name="name" type="text" /></label>
-+          <label>Chapter<input required name="chapter" type="text" placeholder="Rotational Motion" /></label>
-+          <label>Question / doubt<textarea required name="query" rows="5" placeholder="Write the exact confusion or question here..."></textarea></label>
-+          <button type="submit">Send Query</button>
-+          <p id="queryStatus" class="status">Ready to collect queries.</p>
-+        </form>
-+      </div>
-+    </section>
- 
--      <div class="row">
-+    <section id="solver" class="card">
-+      <h2>JEE Physics Problem Solver</h2>
-+      <textarea id="question" placeholder="Paste a JEE or NSEP physics problem here..."></textarea>
-+      <div class="solver-controls">
-         <select id="topic">
--          <option value="">General</option>
-+          <option value="General">General</option>
-           <option>Mechanics</option>
-           <option>Electrodynamics</option>
-           <option>Optics</option>
-           <option>Thermal Physics</option>
-           <option>Modern Physics</option>
-         </select>
--
--        <!-- button triggers solveProblem() in script.js -->
--        <button id="solveBtn" onclick="solveProblem()">Solve</button>
--
--        <div class="small">Status: <span id="status">Ready</span></div>
-+        <button id="solveBtn" type="button">Solve Problem</button>
-+        <span class="status">Status: <strong id="status">Ready</strong></span>
-       </div>
--    </section>
--
--    <section class="card">
--      <h2>Solution</h2>
--      <div id="solution" class="solution">Your step-by-step solution will appear here.</div>
--    </section>
--
--    <section class="card small">
--      <div><strong>Note:</strong> Solutions use LaTeX. If the AI output is plain text, we try to auto-convert common equation-like lines into LaTeX for rendering.</div>
-+      <div id="solution" class="solution">Step-by-step solution appears here.</div>
-     </section>
-   </main>
- 
-   <footer>
--    <small>Built by Abhay — PhyMasterJEE</small>
-+    <small>© PhyMasterJEE • Built for phymasterjee.in</small>
-   </footer>
- 
--  <!-- Link to the JS logic -->
-   <script src="script.js"></script>
- </body>
--</html>
-\ No newline at end of file
-+</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PhyMasterJEE | Courses, Doubts & JEE Physics Solver</title>
+  <meta name="description" content="PhyMasterJEE helps students prepare Physics for JEE with paid courses, doubt collection and an AI-powered problem solver." />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <p class="kicker">phymasterjee.in</p>
+      <h1>Build your JEE Physics edge with PhyMasterJEE</h1>
+      <p class="hero-copy">
+        Start with foundation-to-advanced courses, collect student queries,
+        and solve numericals instantly using AI.
+      </p>
+      <a class="cta" href="#courses">Explore Courses</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- COURSES -->
+    <section id="courses" class="card">
+      <h2>Courses you can sell now</h2>
+      <div class="course-grid">
+        <article class="course-card">
+          <h3>JEE Main Physics Sprint</h3>
+          <p>High-scoring chapterwise modules + weekly tests.</p>
+          <p class="price">₹2,499</p>
+        </article>
+
+        <article class="course-card">
+          <h3>JEE Advanced Problem Camp</h3>
+          <p>Advanced illustrations and rank-booster sheets.</p>
+          <p class="price">₹5,999</p>
+        </article>
+
+        <article class="course-card">
+          <h3>NSEP + Olympiad Foundation</h3>
+          <p>Conceptual depth for serious aspirants.</p>
+          <p class="price">₹3,999</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- LEAD FORM -->
+    <section class="card">
+      <h2>Student Lead Collection</h2>
+      <form name="student-leads" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="student-leads" />
+
+        <label>Name
+          <input required type="text" name="name" />
+        </label>
+
+        <label>Phone
+          <input required type="tel" name="phone" />
+        </label>
+
+        <label>Email
+          <input required type="email" name="email" />
+        </label>
+
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <!-- SOLVER -->
+    <section class="card">
+      <h2>JEE Physics Problem Solver</h2>
+
+      <textarea id="question" placeholder="Paste a JEE physics problem here..."></textarea>
+
+      <div class="solver-controls">
+        <select id="topic">
+          <option value="General">General</option>
+          <option>Mechanics</option>
+          <option>Electrodynamics</option>
+          <option>Optics</option>
+          <option>Thermal Physics</option>
+          <option>Modern Physics</option>
+        </select>
+
+        <button id="solveBtn" type="button">Solve Problem</button>
+        <span>Status: <strong id="status">Ready</strong></span>
+      </div>
+
+      <div id="solution" class="solution">
+        Step-by-step solution will appear here.
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <small>© PhyMasterJEE • Built for phymasterjee.in</small>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
