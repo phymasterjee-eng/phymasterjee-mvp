@@ -11,26 +11,17 @@ exports.handler = async function (event) {
       };
     }
 
-    if (!question || !question.trim()) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: "Question is required." })
-      };
-    }
-
     const prompt = `
 You are an expert JEE Physics teacher.
 
-Solve the following problem step-by-step clearly.
-Use clean reasoning.
-Use LaTeX formatting for equations.
+Solve step-by-step clearly with equations in LaTeX.
 
 Topic: ${topic || "General"}
 Question: ${question}
 `;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: {
@@ -50,7 +41,6 @@ Question: ${question}
 
     console.log("Gemini response:", JSON.stringify(data));
 
-    // Handle API error properly
     if (data.error) {
       return {
         statusCode: 500,
