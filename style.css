@@ -1,87 +1,231 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f9;
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
-
-header {
-  background: #0078D7;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 28px;
-}
-
-.tag {
-  margin-top: 5px;
-  font-size: 14px;
-  font-weight: 300;
-}
-
-main {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 10px;
-}
-
-.card {
-  background: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-textarea {
-  width: 100%;
-  height: 120px;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.row {
-  display: flex;
-  gap: 10px;
-}
-
-select, button {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-button {
-  background: #0078D7;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #005a9e;
-}
-
-.status {
-  margin-top: 10px;
-  font-size: 14px;
-  color: gray;
-}
-
-.solution {
-  background: #f9fafc;
-  padding: 15px;
-  border-radius: 6px;
-  border: 1px solid #eee;
-  font-family: "Courier New", monospace;
-  white-space: pre-wrap;
-}
+diff --git a/style.css b/style.css
+index 55128190246102079d8544dacbd19f46a15858de..9e9359ede3ae5d18bf1083bd7946a5b22ac45f10 100644
+--- a/style.css
++++ b/style.css
+@@ -1,87 +1,175 @@
++:root {
++  --bg: #f3f7ff;
++  --card: #ffffff;
++  --text: #14213d;
++  --muted: #53627a;
++  --primary: #0957d2;
++}
++
++* {
++  box-sizing: border-box;
++}
++
+ body {
+-  font-family: Arial, sans-serif;
+-  background: #f4f6f9;
+   margin: 0;
+-  padding: 0;
+-  color: #333;
++  font-family: Inter, "Segoe UI", Arial, sans-serif;
++  background: var(--bg);
++  color: var(--text);
+ }
+ 
+-header {
+-  background: #0078D7;
+-  color: white;
+-  padding: 20px;
+-  text-align: center;
++.container {
++  max-width: 1100px;
++  margin: 0 auto;
++  padding: 0 16px;
+ }
+ 
+-header h1 {
+-  margin: 0;
+-  font-size: 28px;
++.hero {
++  background: linear-gradient(140deg, #0847ac, #0d67df);
++  color: #fff;
++  padding: 48px 0;
+ }
+ 
+-.tag {
+-  margin-top: 5px;
+-  font-size: 14px;
+-  font-weight: 300;
++.kicker {
++  text-transform: uppercase;
++  letter-spacing: 1.5px;
++  font-size: 12px;
++  opacity: 0.85;
+ }
+ 
+-main {
+-  max-width: 800px;
+-  margin: 20px auto;
+-  padding: 10px;
++.hero h1 {
++  margin: 8px 0 12px;
++  font-size: 36px;
+ }
+ 
+-.card {
+-  background: white;
+-  padding: 20px;
++.hero-copy {
++  max-width: 760px;
++  line-height: 1.5;
+   margin-bottom: 20px;
++}
++
++.cta {
++  display: inline-block;
++  text-decoration: none;
++  color: var(--primary);
++  background: #fff;
++  padding: 10px 16px;
+   border-radius: 8px;
+-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
++  font-weight: 600;
+ }
+ 
+-textarea {
+-  width: 100%;
+-  height: 120px;
++main {
++  padding: 24px 0 40px;
++}
++
++.card {
++  background: var(--card);
++  padding: 22px;
++  border-radius: 12px;
++  box-shadow: 0 8px 24px rgba(20, 33, 61, 0.08);
++  margin-bottom: 18px;
++}
++
++.muted {
++  color: var(--muted);
++  margin-top: 4px;
++}
++
++.course-grid {
++  margin-top: 14px;
++  display: grid;
++  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
++  gap: 12px;
++}
++
++.course-card {
++  border: 1px solid #d7e2f5;
++  border-radius: 10px;
++  padding: 14px;
++}
++
++.price {
++  margin-bottom: 0;
++  font-weight: 700;
++  color: var(--primary);
++}
++
++.two-col {
++  display: grid;
++  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
++  gap: 20px;
++}
++
++label {
++  display: block;
+   margin-bottom: 10px;
+-  padding: 10px;
+-  border: 1px solid #ccc;
+-  border-radius: 6px;
++  font-weight: 500;
+   font-size: 14px;
+ }
+ 
+-.row {
+-  display: flex;
+-  gap: 10px;
++input,
++select,
++textarea,
++button {
++  width: 100%;
++  margin-top: 6px;
++  border-radius: 8px;
++  border: 1px solid #ccd8ef;
++  padding: 10px;
++  font: inherit;
+ }
+ 
+-select, button {
+-  padding: 10px;
+-  border-radius: 6px;
+-  border: 1px solid #ccc;
+-  font-size: 14px;
++textarea {
++  min-height: 120px;
++  resize: vertical;
+ }
+ 
+ button {
+-  background: #0078D7;
+-  color: white;
+   border: none;
++  background: var(--primary);
++  color: #fff;
+   cursor: pointer;
++  font-weight: 600;
+ }
+ 
+-button:hover {
+-  background: #005a9e;
++button:disabled {
++  opacity: 0.6;
++  cursor: not-allowed;
+ }
+ 
+ .status {
+-  margin-top: 10px;
++  color: var(--muted);
+   font-size: 14px;
+-  color: gray;
++}
++
++.solver-controls {
++  display: grid;
++  gap: 10px;
++  grid-template-columns: 180px 180px 1fr;
++  align-items: center;
++  margin-bottom: 12px;
+ }
+ 
+ .solution {
+-  background: #f9fafc;
+-  padding: 15px;
+-  border-radius: 6px;
+-  border: 1px solid #eee;
+-  font-family: "Courier New", monospace;
++  border: 1px solid #d9e4f6;
++  border-radius: 8px;
++  background: #f9fbff;
++  padding: 14px;
++  min-height: 150px;
+   white-space: pre-wrap;
+-}
+\ No newline at end of file
++}
++
++footer {
++  text-align: center;
++  color: var(--muted);
++  padding: 14px;
++}
++
++@media (max-width: 760px) {
++  .hero h1 {
++    font-size: 29px;
++  }
++
++  .solver-controls {
++    grid-template-columns: 1fr;
++  }
++}
