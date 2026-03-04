@@ -11,16 +11,13 @@ const apiKey = process.env.GEMINI_API_KEY
 
 const response = await fetch(
 
-`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
 
 {
-
 method: "POST",
 
 headers: {
-
 "Content-Type": "application/json"
-
 },
 
 body: JSON.stringify({
@@ -28,12 +25,23 @@ body: JSON.stringify({
 contents: [
 
 {
-
 parts: [
 
 {
+text: `You are a JEE Physics teacher.
 
-text: `You are a JEE Physics teacher. Solve clearly and step by step without using * symbols. Question: ${question}`
+Solve the problem clearly step-by-step.
+
+Format the solution as:
+
+Concept
+Formula
+Calculation
+Final Answer
+
+Do not use * or markdown.
+
+Question: ${question}`
 
 }
 
@@ -45,13 +53,17 @@ text: `You are a JEE Physics teacher. Solve clearly and step by step without usi
 
 })
 
-})
+}
 
+)
 
 
 const data = await response.json()
 
-const answer = data.candidates[0].content.parts[0].text
+console.log("Gemini response:", JSON.stringify(data))
+
+
+const answer = data.candidates?.[0]?.content?.parts?.[0]?.text || "No solution generated."
 
 
 return {
@@ -69,6 +81,8 @@ answer: answer
 }
 
 catch(error){
+
+console.log("ERROR:", error)
 
 return {
 
