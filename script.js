@@ -46,9 +46,6 @@ let text=data.answer
 
 text=text.replace(/\*/g,"")
 
-
-text=text.replace(/\*/g,"")
-
 text=text.replace("Concept:", "<h3>Concept</h3>")
 text=text.replace("Formula:", "<h3>Formula</h3>")
 text=text.replace("Calculation:", "<h3>Calculation</h3>")
@@ -58,6 +55,9 @@ text=text.replace(/\n/g,"<br>")
 
 result.innerHTML=text
 
+if(window.MathJax){
+MathJax.typesetPromise()
+}
 
 }
 

@@ -1,13 +1,32 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PhyMasterJEE – AI Physics Solver</title>
+<title>PhyMasterJEE – AI Physics Solver for JEE</title>
+
+<meta name="description" content="Solve JEE Physics problems instantly with AI-powered step-by-step explanations.">
 
 <link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- MathJax for equation rendering -->
+
+<script>
+window.MathJax = {
+tex: {
+inlineMath: [['$', '$'], ['\\(', '\\)']],
+displayMath: [['$$','$$'], ['\\[','\\]']]
+}
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </head>
 
@@ -21,15 +40,11 @@ PhyMasterJEE
 
 <nav>
 
-<a href="#">Home</a>
-<a href="#">AI Solver</a>
-<a href="#">Concepts</a>
-<a href="#">Contact</a>
+<a href="#">Home</a> <a href="#solver">AI Solver</a> <a href="#">Concepts</a> <a href="#">Contact</a>
 
 </nav>
 
 </header>
-
 
 <section class="hero">
 
@@ -38,7 +53,7 @@ PhyMasterJEE
 <h1>AI Powered Physics Solver</h1>
 
 <p>
-Solve any JEE Physics problem instantly with step-by-step explanation.
+Solve any JEE Physics problem instantly with step-by-step explanations and properly formatted equations.
 </p>
 
 <button onclick="scrollToSolver()">
@@ -49,55 +64,51 @@ Try Solver
 
 <div class="hero-image">
 
-<img src="images/physics-ai.png">
+<img src="images/physics-ai.png" alt="AI Physics Solver">
 
 </div>
 
 </section>
-
 
 <section class="features">
 
 <div class="feature">
 
-<img src="images/concept.png">
+<img src="images/concept.png" alt="Concept">
 
 <h3>Concept Explanation</h3>
 
 <p>
-Understand the physics concept clearly.
+Understand the core physics ideas behind every problem.
 </p>
 
 </div>
 
-
 <div class="feature">
 
-<img src="images/steps.png">
+<img src="images/steps.png" alt="Steps">
 
-<h3>Step-by-step Solutions</h3>
+<h3>Step-by-Step Solutions</h3>
 
 <p>
-Every problem solved like a teacher explains.
+Every problem solved logically like a classroom explanation.
 </p>
 
 </div>
 
-
 <div class="feature">
 
-<img src="images/jee.png">
+<img src="images/jee.png" alt="JEE">
 
 <h3>JEE Focused</h3>
 
 <p>
-Specially optimized for JEE Main & Advanced.
+Designed specifically for JEE Main & Advanced preparation.
 </p>
 
 </div>
 
 </section>
-
 
 <section id="solver">
 
@@ -109,11 +120,20 @@ Specially optimized for JEE Main & Advanced.
 
 <button onclick="solveProblem()">Solve Problem</button>
 
+<p id="status"></p>
+
 <div id="result"></div>
 
 </section>
 
+<footer>
+
+<p>© 2026 PhyMasterJEE</p>
+
+</footer>
+
 <script src="script.js"></script>
 
 </body>
+
 </html>
