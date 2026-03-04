@@ -1,82 +1,87 @@
-exports.handler = async function (event) {
-  try {
-    const { question, topic } = JSON.parse(event.body || "{}");
-    const apiKey = process.env.GEMINI_API_KEY;
+export async function handler(event) {
 
-    if (!apiKey) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: "Missing GEMINI_API_KEY" })
-      };
-    }
+try {
 
-    if (!question || !question.trim()) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: "Question is required." })
-      };
-    }
+const body = JSON.parse(event.body)
 
-    const prompt = `
-You are an expert JEE Physics teacher.
+const question = body.question
 
-Solve step-by-step clearly.
-Use LaTeX formatting for equations.
+const apiKey = process.env.GEMINI_API_KEY
 
-Topic: ${topic || "General"}
-Question: ${question}
-`;
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              role: "user",
-              parts: [{ text: prompt }]
-            }
-          ]
-        })
-      }
-    );
+const response = await fetch(
 
-    const data = await response.json();
+`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
 
-    console.log("Gemini response:", JSON.stringify(data));
+{
 
-    if (data.error) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: data.error.message })
-      };
-    }
+method: "POST",
 
-    if (!data.candidates || data.candidates.length === 0) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: "No candidates returned from Gemini." })
-      };
-    }
+headers: {
 
-    const solution = data.candidates[0].content.parts
-      .map(part => part.text)
-      .join("\n");
+"Content-Type": "application/json"
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ solution })
-    };
+},
 
-  } catch (error) {
-    console.error("Server error:", error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Server error occurred." })
-    };
-  }
-};
+body: JSON.stringify({
+
+contents: [
+
+{
+
+parts: [
+
+{
+
+text: `You are a JEE Physics teacher. Solve clearly and step by step without using * symbols. Question: ${question}`
+
+}
+
+]
+
+}
+
+]
+
+})
+
+})
+
+
+
+const data = await response.json()
+
+const answer = data.candidates[0].content.parts[0].text
+
+
+return {
+
+statusCode: 200,
+
+body: JSON.stringify({
+
+answer: answer
+
+})
+
+}
+
+}
+
+catch(error){
+
+return {
+
+statusCode: 500,
+
+body: JSON.stringify({
+
+error: "AI failed"
+
+})
+
+}
+
+}
+
+}
