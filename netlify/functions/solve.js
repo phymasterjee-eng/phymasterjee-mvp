@@ -1,34 +1,56 @@
+/* ================================= */
+/* Netlify Function: Physics Solver  */
+/* ================================= */
+
 export async function handler(event) {
 
-try {
+  try {
 
-const body = JSON.parse(event.body)
+    /* ===== ADDED: Safe parsing of request body ===== */
+    const body = JSON.parse(event.body || "{}")
+    const question = body.question
 
-const question = body.question
+    /* ===== ADDED: Validate question ===== */
+    if(!question){
+      return {
+        statusCode:400,
+        body:JSON.stringify({
+          error:"No question provided"
+        })
+      }
+    }
 
-const apiKey = process.env.GEMINI_API_KEY
+    /* ===== API KEY from Netlify Environment ===== */
+    const apiKey = process.env.GEMINI_API_KEY
 
+    /* ===== ADDED: Check if API key missing ===== */
+    if(!apiKey){
+      return {
+        statusCode:500,
+        body:JSON.stringify({
+          error:"Gemini API key not configured"
+        })
+      }
+    }
 
-const response = await fetch(
+    /* ================================= */
+    /* Call Gemini API */
+    /* ================================= */
 
-`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
 
-{
-method: "POST",
-
-headers: {
-"Content-Type": "application/json"
-},
-
-body: JSON.stringify({
-
-contents: [
-
-{
-parts: [
-
-{
-text: `You are a JEE Physics teacher.
+          contents:[
+            {
+              parts:[
+                {
+                  text:`You are a JEE Physics teacher.
 
 Solve the physics problem step-by-step.
 
@@ -38,10 +60,13 @@ Concept:
 Explain the physics idea.
 
 Formula:
-Write equations using LATEX between $$ $$
+Write equations using LATEX between $$ $$.
+
+Substitution:
+Substitute numerical values using LATEX.
 
 Calculation:
-Show substitutions using LATEX.
+Show calculation steps.
 
 Final Answer:
 Write the final expression using LATEX.
@@ -57,59 +82,56 @@ $$F = \\frac{9\\times10^9 \\times 2 \\times 3}{4^2}$$
 Do NOT use markdown symbols like * or bullet points.
 
 Question: ${question}`
-}
+                }
+              ]
+            }
+          ]
 
-]
+        })
+      }
+    )
 
-}
+    /* ================================= */
+    /* Parse Gemini response */
+    /* ================================= */
 
-]
+    const data = await response.json()
 
-})
+    console.log("Gemini response:", JSON.stringify(data))
 
-}
+    /* ===== IMPROVED: Safe extraction of answer ===== */
+    const answer =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text
+      || "No solution generated."
 
-)
+    /* ================================= */
+    /* Return solution to frontend */
+    /* ================================= */
 
+    return {
+      statusCode:200,
+      body:JSON.stringify({
+        answer:answer
+      })
+    }
 
-const data = await response.json()
+  }
 
-console.log("Gemini response:", JSON.stringify(data))
+  /* ================================= */
+  /* Error handling */
+  /* ================================= */
 
+  catch(error){
 
-const answer = data.candidates?.[0]?.content?.parts?.[0]?.text || "No solution generated."
+    console.log("ERROR:", error)
 
+    return {
+      statusCode:500,
+      body:JSON.stringify({
+        error:"AI failed"
+      })
+    }
 
-return {
-
-statusCode: 200,
-
-body: JSON.stringify({
-
-answer: answer
-
-})
-
-}
-
-}
-
-catch(error){
-
-console.log("ERROR:", error)
-
-return {
-
-statusCode: 500,
-
-body: JSON.stringify({
-
-error: "AI failed"
-
-})
-
-}
-
-}
+  }
 
 }

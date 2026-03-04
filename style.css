@@ -1,3 +1,8 @@
+
+/* =============================== /
+/ GENERAL PAGE STYLING /
+/ =============================== /
+
 body{
 
 font-family:Arial;
@@ -6,6 +11,10 @@ background:#f5f7fb;
 
 }
 
+
+/ =============================== /
+/ HEADER /
+/ =============================== /
 
 header{
 
@@ -38,6 +47,10 @@ color:#333;
 
 }
 
+
+/ =============================== /
+/ HERO SECTION /
+/ =============================== /
 
 .hero{
 
@@ -95,6 +108,10 @@ width:450px;
 }
 
 
+/ =============================== /
+/ FEATURES SECTION /
+/ =============================== /
+
 .features{
 
 display:flex;
@@ -113,6 +130,30 @@ width:250px;
 }
 
 
+/ ===== ADDED: Scroll animation initial state ===== /
+
+.feature{
+
+opacity:0;
+
+transform:translateY(40px);
+
+transition:all 0.8s ease;
+
+}
+
+
+/ ===== ADDED: Scroll animation visible state ===== /
+
+.feature.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
 .feature img{
 
 width:120px;
@@ -120,6 +161,10 @@ margin-bottom:20px;
 
 }
 
+
+/ =============================== /
+/ SOLVER SECTION /
+/ =============================== /
 
 #solver{
 
@@ -130,6 +175,42 @@ text-align:center;
 
 }
 
+
+/ ===== ADDED: Example problem styling ===== /
+
+.examples{
+
+margin-bottom:20px;
+
+}
+
+.examples button{
+
+margin:5px;
+padding:10px 15px;
+
+border:none;
+
+background:#eef4ff;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-size:14px;
+
+}
+
+.examples button:hover{
+
+background:#d9e6ff;
+
+}
+
+
+/ =============================== /
+/ QUESTION INPUT /
+/ =============================== /
 
 #solver textarea{
 
@@ -142,6 +223,10 @@ font-size:16px;
 
 }
 
+
+/ =============================== /
+/ SOLVE BUTTON /
+/ =============================== /
 
 #solver button{
 
@@ -156,8 +241,16 @@ border:none;
 
 font-size:16px;
 
+cursor:pointer;
+
+border-radius:6px;
+
 }
 
+
+/ =============================== /
+/ RESULT BOX /
+/ =============================== /
 
 #result{
 
@@ -166,6 +259,7 @@ margin-top:40px;
 text-align:left;
 
 width:70%;
+
 margin-left:auto;
 margin-right:auto;
 
@@ -177,13 +271,53 @@ border-radius:10px;
 
 box-shadow:0 10px 30px rgba(0,0,0,0.1);
 
-line-height:1.6;
+line-height:1.7;
+
+font-size:16px;
 
 }
+
+
+/ ===== ADDED: Headings inside solution ===== /
 
 #result h3{
 
-margin-top:20px;
 color:#0071e3;
 
+border-bottom:2px solid #eee;
+
+padding-bottom:5px;
+
+margin-top:20px;
+
 }
+
+
+/ =============================== /
+/ LOADING SPINNER /
+/ =============================== */
+
+.loader{
+
+border:6px solid #f3f3f3;
+
+border-top:6px solid #0071e3;
+
+border-radius:50%;
+
+width:40px;
+
+height:40px;
+
+animation:spin 1s linear infinite;
+
+margin:20px auto;
+
+}
+
+
+@keyframes spin{
+
+0%{transform:rotate(0deg);}
+
+100%{transform:rotate(360deg)

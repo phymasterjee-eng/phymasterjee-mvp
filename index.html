@@ -15,13 +15,15 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+<!-- ============================= -->
 <!-- MathJax for equation rendering -->
+<!-- ============================= -->
 
 <script>
 window.MathJax = {
 tex: {
-inlineMath: [['$', '$'], ['\\(', '\\)']],
-displayMath: [['$$','$$'], ['\\[','\\]']]
+inlineMath: [['$', '$'], ['\(', '\)']],
+displayMath: [['$$','$$'], ['\[','\]']]
 }
 };
 </script>
@@ -40,11 +42,19 @@ PhyMasterJEE
 
 <nav>
 
-<a href="#">Home</a> <a href="#solver">AI Solver</a> <a href="#">Concepts</a> <a href="#">Contact</a>
+<a href="#">Home</a>
+<a href="#solver">AI Solver</a>
+<a href="#">Concepts</a>
+<a href="#">Contact</a>
 
 </nav>
 
 </header>
+
+
+<!-- ============================= -->
+<!-- HERO SECTION -->
+<!-- ============================= -->
 
 <section class="hero">
 
@@ -70,6 +80,12 @@ Try Solver
 
 </section>
 
+
+<!-- ============================= -->
+<!-- FEATURES SECTION -->
+<!-- (Scroll animation will apply here) -->
+<!-- ============================= -->
+
 <section class="features">
 
 <div class="feature">
@@ -84,6 +100,7 @@ Understand the core physics ideas behind every problem.
 
 </div>
 
+
 <div class="feature">
 
 <img src="images/steps.png" alt="Steps">
@@ -95,6 +112,7 @@ Every problem solved logically like a classroom explanation.
 </p>
 
 </div>
+
 
 <div class="feature">
 
@@ -110,9 +128,36 @@ Designed specifically for JEE Main & Advanced preparation.
 
 </section>
 
+
+<!-- ============================= -->
+<!-- SOLVER SECTION -->
+<!-- ============================= -->
+
 <section id="solver">
 
 <h2>JEE Physics Problem Solver</h2>
+
+
+<!-- ===== ADDED: Example problems for quick testing ===== -->
+
+<div class="examples">
+
+<p>Try Example Problems:</p>
+
+<button onclick="fillExample('State Coulomb law and derive the force between two charges')">
+Coulomb Law
+</button>
+
+<button onclick="fillExample('Derive the time of flight of a projectile')">
+Projectile Motion
+</button>
+
+<button onclick="fillExample('Find energy stored in a capacitor')">
+Capacitor Energy
+</button>
+
+</div>
+
 
 <textarea id="question" placeholder="Enter your physics question here"></textarea>
 
@@ -120,17 +165,38 @@ Designed specifically for JEE Main & Advanced preparation.
 
 <button onclick="solveProblem()">Solve Problem</button>
 
+
+<!-- ===== ADDED: Loader spinner (controlled by script.js) ===== -->
+
+<div id="loader" class="loader" style="display:none;"></div>
+
+
+<!-- ===== ADDED: Status message like "Solving..." ===== -->
+
 <p id="status"></p>
+
+
+<!-- ===== Solver result appears here ===== -->
 
 <div id="result"></div>
 
 </section>
 
+
+<!-- ============================= -->
+<!-- FOOTER -->
+<!-- ============================= -->
+
 <footer>
 
-<p>© 2026 PhyMasterJEE</p>
+<p>©️ 2026 PhyMasterJEE</p>
 
 </footer>
+
+
+<!-- ============================= -->
+<!-- MAIN JAVASCRIPT -->
+<!-- ============================= -->
 
 <script src="script.js"></script>
 
