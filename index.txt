@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PhyMasterJEE – AI Physics Solver</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+PhyMasterJEE
+</div>
+
+<nav>
+
+<a href="#">Home</a>
+<a href="#">AI Solver</a>
+<a href="#">Concepts</a>
+<a href="#">Contact</a>
+
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>AI Powered Physics Solver</h1>
+
+<p>
+Solve any JEE Physics problem instantly with step-by-step explanation.
+</p>
+
+<button onclick="scrollToSolver()">
+Try Solver
+</button>
+
+</div>
+
+<div class="hero-image">
+
+<img src="images/physics-ai.png">
+
+</div>
+
+</section>
+
+
+<section class="features">
+
+<div class="feature">
+
+<img src="images/concept.png">
+
+<h3>Concept Explanation</h3>
+
+<p>
+Understand the physics concept clearly.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<img src="images/steps.png">
+
+<h3>Step-by-step Solutions</h3>
+
+<p>
+Every problem solved like a teacher explains.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<img src="images/jee.png">
+
+<h3>JEE Focused</h3>
+
+<p>
+Specially optimized for JEE Main & Advanced.
+</p>
+
+</div>
+
+</section>
+
+
+<section id="solver">
+
+<h2>JEE Physics Problem Solver</h2>
+
+<textarea id="question" placeholder="Enter your physics question here"></textarea>
+
+<br>
+
+<button onclick="solveProblem()">Solve Problem</button>
+
+<div id="result"></div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
